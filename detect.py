@@ -1,5 +1,6 @@
 import csv
 
+# Function to round sensor values based on thresholds
 def round_sensor_value(value):
     if(0 <= value < 0.35):
         return 0
@@ -15,12 +16,13 @@ def sign_detect(sensor_data, csv_file):
 
     fingers = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
 
-    # iterate through the rows of the csv file to find the matching combination sign
+    # Iterate through the rows of the CSV file to find the matching combination sign
     with open(csv_file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            for finger in fingers:
-                row_values = [float(row[finger])]
+            # Collect all finger values from the current row and convert them to float
+            row_values = [float(row[finger]) for finger in fingers]
+
             # Check if the rounded sensor values match the row values
             if rounded_values == row_values:
                 print(f"Match found for {row['Letter']}")
