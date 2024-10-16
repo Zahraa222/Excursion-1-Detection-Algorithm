@@ -14,7 +14,7 @@ def sign_detect(sensor_data, csv_file):
     # Round the sensor values based on the defined threshold
     rounded_values = [round_sensor_value(value) for value in sensor_data]
 
-    fingers = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
+    fingers = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky', 'Wrist rotation-X (Up and down)', 'Wrist rotation-Y (Left)', 'Wrist rotation-Z (Elbow Twist)']
 
     # Iterate through the rows of the CSV file to find the matching combination sign
     with open(csv_file, newline='') as csvfile:
@@ -27,11 +27,12 @@ def sign_detect(sensor_data, csv_file):
             if rounded_values == row_values:
                 print(f"Match found for {row['Letter']}")
                 return row['Letter']
-    return 'No match found'
+    return
 
 # Example usage
 
-data = list(map(float, input("Enter the sensor data separated by spaces: ").split()))
-csv_file = 'sample_Data - Alphabet.csv'
-result = sign_detect(data, csv_file)
-print(f"Detected sign: {result}")
+while(1):
+    data = list(map(float, input("Enter the sensor data separated by spaces: ").split()))
+    csv_file = 'ASL_Gestures.csv'
+    result = sign_detect(data, csv_file)
+    print(f"Detected sign: {result}")
